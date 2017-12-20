@@ -1,0 +1,69 @@
+package com.sdp.edu.bean;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class T_MALL_VALUE {
+
+	private int id;
+	private String shxzh;
+	private String shfqy;
+	private int shxm_id;
+	private String shxzh_mch;
+	private Date chjshj;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getShxzh() {
+		return shxzh;
+	}
+
+	public void setShxzh(String shxzh) {
+		this.shxzh = shxzh;
+	}
+
+	public String getShfqy() {
+		return shfqy;
+	}
+
+	public void setShfqy(String shfqy) {
+		this.shfqy = shfqy;
+	}
+
+	public int getShxm_id() {
+		return shxm_id;
+	}
+
+	public void setShxm_id(int shxm_id) {
+		this.shxm_id = shxm_id;
+	}
+
+	public String getShxzh_mch() {
+		return shxzh_mch;
+	}
+
+	public void setShxzh_mch(String shxzh_mch) {
+		this.shxzh_mch = shxzh_mch;
+	}
+
+	public Date getChjshj() throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String format = dateFormat.format(chjshj);
+
+		return dateFormat.parse(format);
+	}
+
+	public void setChjshj(Date chjshj) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String format = dateFormat.format(chjshj);
+		this.chjshj = dateFormat.parse(format);
+	}
+
+}

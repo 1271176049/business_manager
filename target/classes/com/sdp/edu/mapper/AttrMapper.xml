@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdp.edu.mapper.AttrMapper">
+	<select id="select_attrs" resultType="com.sdp.edu.vo.Attr">
+		select
+		t_mall_attr.id,t_mall_attr.shxm_mch,t_mall_value.shxzh,t_mall_value.chjshj
+		from t_mall_attr
+		left join t_mall_value
+		on
+		t_mall_attr.Id=t_mall_value.shxm_id
+		where t_mall_attr.flbh2=#{a};
+	</select>
+
+	<select id="select_attr2" resultMap="attr2">
+		select attr.id
+		attr_id,value.id valueid,attr.*,value.*
+		from t_mall_attr attr
+		inner join
+		t_mall_value value
+		on attr.id=value.shxm_id
+		where
+		attr.flbh2=#{a}
+	</select>
+	<resultMap type="com.sdp.edu.vo.Attr2" id="attr2"
+		autoMapping="true">
+		<result column="attr_id" property="id" />
+		<collection property="list_values" ofType="com.sdp.edu.bean.T_MALL_VALUE"
+			autoMapping="true">
+			<result column="valueid" property="id" />
+		</collection>
+	</resultMap>
+	<insert id="insert_attr" useGeneratedKeys="true" keyColumn="id"
+		keyProperty="attr.id">
+		insert into
+		t_mall_attr(shxm_mch,flbh2)values(#{attr.shxm_mch},#{class2id});
+	</insert>
+	<insert id="insert_value">
+		insert into t_mall_value(shxzh,shxm_id,shxzh_mch)values
+		<foreach collection="value_list" item="value" separator=",">
+			(
+			#{value.shxzh},#{attrid},#{value.shxzh_mch}
+			)
+		</foreach>
+	</insert>
+</mapper>
+
